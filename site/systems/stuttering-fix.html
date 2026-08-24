@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mortal Shell II PC stutter and frame drops: what to try</title>
+<meta name="description" content="A symptom-first checklist for Mortal Shell II stutter on PC, the official system requirements, and why the DirectX 11 launch-option advice is contradictory.">
+<link rel="canonical" href="https://kevin-wei-sudo.github.io/marrow-notes/systems/stuttering-fix.html">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mortal Shell II PC stutter and frame drops: what to try">
+<meta property="og:description" content="A symptom-first checklist for Mortal Shell II stutter on PC, the official system requirements, and why the DirectX 11 launch-option advice is contradictory.">
+<meta property="og:url" content="https://kevin-wei-sudo.github.io/marrow-notes/systems/stuttering-fix.html">
+<meta property="og:site_name" content="Marrow Notes">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Mortal Shell II PC stutter and frame drops: what to try">
+<meta name="twitter:description" content="A symptom-first checklist for Mortal Shell II stutter on PC, the official system requirements, and why the DirectX 11 launch-option advice is contradictory.">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Stutter and frame drops on PC","description":"A symptom-first checklist for Mortal Shell II stutter on PC, the official system requirements, and why the DirectX 11 launch-option advice is contradictory.","inLanguage":"en","dateModified":"2026-08-24","publisher":{"@type":"Organization","name":"Marrow Notes"}}</script>
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="bar"><div class="bar-in">
+  <a class="brand" href="../index.html">Marrow<span>&#183;</span>Notes</a>
+  <nav class="nav" aria-label="Main"><a href="../bosses/index.html">Bosses</a><a href="../shells/index.html">Shells</a><a href="../systems/index.html" aria-current="page">Systems</a></nav>
+</div></header>
+
+<div class="wrap"><div class="cols">
+<main id="main">
+<nav class="crumb" aria-label="Breadcrumb"><a href="../index.html">Home</a> &rsaquo; <a href="../systems/index.html">Systems</a> &rsaquo; Stutter and frame drops on PC</nav>
+<p class="eyebrow">Systems</p>
+<h1>Stutter and frame drops on PC</h1>
+<p class="lede">Three different problems get called stutter, and they have three different fixes. Sorting out which one you have is worth more than any settings preset someone else wrote.</p>
+<h2 id="sort-the-symptom-first">Sort the symptom first</h2>
+<ul><li><strong>Traversal hitch</strong> — a short freeze when you enter a new area or swing the camera. Usually shader compilation or asset streaming.</li><li><strong>Low average frame rate</strong> — consistently slow everywhere. Usually GPU-bound.</li><li><strong>Erratic spikes in combat</strong> — fine until effects fire. Usually VRAM or CPU-bound.</li><li><strong>Delayed-feeling input</strong> — not a frame rate problem at all.</li></ul>
+<p>Change one thing at a time and re-run the same route, with the same camera movement and the same weather, before deciding whether it helped.<span class="mk mk-t3" title="Single source, or a claim we could not cross-check">Unconfirmed</span> Comparing a quiet indoor scene to a crowded outdoor fight tells you nothing.<span class="mk mk-t3" title="Single source, or a claim we could not cross-check">Unconfirmed</span></p>
+<h2 id="check-the-floor-first">Check the floor first</h2>
+<p>The official Steam listing sets hard requirements that are easy to skim past: 70 GB of space, and an SSD is required, not recommended.<span class="mk mk-t1" title="Stated by Cold Symmetry, Playstack, or a platform store listing">Official</span> The PC release is Windows-only.<span class="mk mk-t1" title="Stated by Cold Symmetry, Playstack, or a platform store listing">Official</span> The stated minimum is an Intel Core i7-10700K or Ryzen 5 3600, 16 GB of RAM, and an RTX 2060 Super or RX 6600.<span class="mk mk-t3" title="Single source, or a claim we could not cross-check">Unconfirmed</span></p>
+<p>If the game is on a mechanical drive, stop reading and move it. Nothing else on this page will help.</p>
+<h2 id="fixes-with-agreement-behind-them">Fixes with agreement behind them</h2>
+<ul><li><strong>Let it sit at the main menu</strong> before loading a save, so background shader compilation finishes.<span class="mk mk-t3" title="Single source, or a claim we could not cross-check">Unconfirmed</span></li><li><strong>Raise the shader cache size</strong> in the NVIDIA Control Panel under 3D Settings — the AMD Software equivalent is in the same area. More than one independent guide lands on this as the single most effective change.<span class="mk mk-t3" title="Single source, or a claim we could not cross-check">Unconfirmed</span></li><li><strong>Update GPU drivers</strong>, and if the issue appeared right after a driver change, compare against the previously stable version rather than changing several things at once.<span class="mk mk-t3" title="Single source, or a claim we could not cross-check">Unconfirmed</span></li><li><strong>Close overlays and hardware-accelerated browsers</strong>, which can hold GPU memory the game wants for combat effects.<span class="mk mk-t3" title="Single source, or a claim we could not cross-check">Unconfirmed</span></li></ul>
+<h2 id="fixes-we-are-not-recommending-yet">Fixes we are not recommending yet</h2>
+<aside class="call "><span class="lab">Disputed</span><p>Forcing DirectX 11 with the <code>-dx11</code> launch option is described by one guide as the highest-impact stability fix available, and by another guide on the same site as something that causes immediate crashes on save load because the game is built natively for DirectX 12. We are not passing on either version until there is an official statement. If you try it, know that you are testing, not fixing.</p></aside>
+<aside class="call call-unconfirmed"><span class="lab">Unconfirmed</span><p>Playstack has shipped a Hotfix 1. We have seen it referenced but have not read the official patch notes directly, so nothing from it is stated as fact on this page. Check the game&#x27;s official channels before applying workarounds that may already be obsolete.</p></aside>
+<h2 id="before-you-file-a-support-ticket">Before you file a support ticket</h2>
+<p>Record your resolution, display mode, preset, frame cap, upscaler, driver version and the exact route you tested.<span class="mk mk-t3" title="Single source, or a claim we could not cross-check">Unconfirmed</span> A report with those fields gets a useful answer; &quot;the game stutters&quot; does not.</p>
+<p>Avoid deleting shader caches or configuration folders unless you have backed them up and official support has asked you to.<span class="mk mk-t3" title="Single source, or a claim we could not cross-check">Unconfirmed</span></p>
+<section class="src"><h2 id="where-this-comes-from">Where this comes from</h2><p class="hint">Every claim above carries a marker. These are the sources behind them, graded by how directly they touch the retail build.</p><ol><li class="s-t1"><span class="nm">Steam store listing <span class="mk mk-t1" title="Stated by Cold Symmetry, Playstack, or a platform store listing">Official</span></span><span class="wh">70 GB install, SSD required, Windows-only</span></li><li class="s-t3"><span class="nm">mortalshelliiguide.wiki <span class="mk mk-t3" title="Single source, or a claim we could not cross-check">Unconfirmed</span></span><span class="wh">Symptom-first diagnostic structure, one-variable-at-a-time methodology, support report fields, warning against deleting caches</span></li><li class="s-t3"><span class="nm">mortalshell2.online <span class="mk mk-t3" title="Single source, or a claim we could not cross-check">Unconfirmed</span></span><span class="wh">Shader cache size as the most effective single fix; references Playstack Hotfix 1 and a keyboard-bindings save workaround</span></li><li class="s-t3"><span class="nm">LagoFast blog <span class="mk mk-t3" title="Single source, or a claim we could not cross-check">Unconfirmed</span></span><span class="wh">Root-cause framing: UE5 Lumen and Nanite overhead, VRAM overflow, CPU bottlenecks. Vendor content — promotional claims discarded.</span></li><li class="s-t3"><span class="nm">Stated minimum specification <span class="mk mk-t3" title="Single source, or a claim we could not cross-check">Unconfirmed</span></span><span class="wh">CPU, RAM and GPU floor, reported secondhand and not yet read from the official listing</span></li></ol></section>
+</main>
+<nav class="toc" aria-label="On this page"><p class="toc-t">On this page</p><ul><li><a href="#sort-the-symptom-first">Sort the symptom first</a></li><li><a href="#check-the-floor-first">Check the floor first</a></li><li><a href="#fixes-with-agreement-behind-them">Fixes with agreement behind them</a></li><li><a href="#fixes-we-are-not-recommending-yet">Fixes we are not recommending yet</a></li><li><a href="#before-you-file-a-support-ticket">Before you file a support ticket</a></li><li><a href="#where-this-comes-from">Where this comes from</a></li></ul></nav>
+</div></div>
+
+<footer><div class="foot">
+  <span>Marrow Notes &mdash; Mortal Shell II guides that show their sources</span>
+  <span>Checked 24 August 2026. Unofficial fan guide, not affiliated with Cold Symmetry or Playstack.</span>
+</div></footer>
+</body>
+</html>

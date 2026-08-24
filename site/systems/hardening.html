@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mortal Shell II Hardening: why it is not working</title>
+<meta name="description" content="How Hardening fits into Mortal Shell II combat, which attacks it cannot answer, and the timing data that no published guide has yet.">
+<link rel="canonical" href="https://kevin-wei-sudo.github.io/marrow-notes/systems/hardening.html">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mortal Shell II Hardening: why it is not working">
+<meta property="og:description" content="How Hardening fits into Mortal Shell II combat, which attacks it cannot answer, and the timing data that no published guide has yet.">
+<meta property="og:url" content="https://kevin-wei-sudo.github.io/marrow-notes/systems/hardening.html">
+<meta property="og:site_name" content="Marrow Notes">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Mortal Shell II Hardening: why it is not working">
+<meta name="twitter:description" content="How Hardening fits into Mortal Shell II combat, which attacks it cannot answer, and the timing data that no published guide has yet.">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Hardening, and why it keeps failing you","description":"How Hardening fits into Mortal Shell II combat, which attacks it cannot answer, and the timing data that no published guide has yet.","inLanguage":"en","dateModified":"2026-08-24","publisher":{"@type":"Organization","name":"Marrow Notes"}}</script>
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="bar"><div class="bar-in">
+  <a class="brand" href="../index.html">Marrow<span>&#183;</span>Notes</a>
+  <nav class="nav" aria-label="Main"><a href="../bosses/index.html">Bosses</a><a href="../shells/index.html">Shells</a><a href="../systems/index.html" aria-current="page">Systems</a></nav>
+</div></header>
+
+<div class="wrap"><div class="cols">
+<main id="main">
+<nav class="crumb" aria-label="Breadcrumb"><a href="../index.html">Home</a> &rsaquo; <a href="../systems/index.html">Systems</a> &rsaquo; Hardening, and why it keeps failing you</nav>
+<p class="eyebrow">Systems</p>
+<h1>Hardening, and why it keeps failing you</h1>
+<p class="lede">Hardening is the mechanic the whole combat system is built around, and it is the one most likely to feel broken. Usually it is not broken. Usually you are using it against something it was never meant to stop.</p>
+<h2 id="what-it-is-for">What it is for</h2>
+<p>Hardening turns you to stone mid-animation, absorbing a blow you would otherwise eat. It exists so you can commit to slow attacks in a game full of fast enemies — you swing, you harden through the counterattack, you finish the swing.</p>
+<p>The failure mode is treating it as a general-purpose defence. It is not. It is a commitment tool.</p>
+<h2 id="when-it-will-not-save-you">When it will not save you</h2>
+<p>Several bosses have attacks that simply do not answer to defensive timing. Magdalena&#x27;s charges are unparryable, and guides consistently recommend dodging over any blocking or parry attempt for the bulk of her moveset.<span class="mk mk-t2" title="Reported by a guide site working from the retail build">Tested</span> If your Hardening feels like it &quot;did not fire&quot;, check whether the move you used it against was ever blockable in the first place.</p>
+<p>The general principle from beginner guidance holds: do not rush into fights swinging. Watch what the enemy is doing and look for safe openings before committing.<span class="mk mk-t2" title="Reported by a guide site working from the retail build">Tested</span> Hardening extends your commitment window — it does not create openings that were not there.</p>
+<h2 id="break-damage-is-the-other-half">Break damage is the other half</h2>
+<p>Most fights are built around filling a Break meter with skills or parries, then landing a riposte, rather than trading raw damage.<span class="mk mk-t2" title="Reported by a guide site working from the retail build">Tested</span> Hardening and Break work together: hardening through a counterattack keeps your combo alive, and the combo is what fills the meter.</p>
+<h2 id="what-we-do-not-know-yet">What we do not know yet</h2>
+<aside class="call call-unconfirmed"><span class="lab">Unconfirmed</span><p>No published guide gives a frame window for Hardening. Every source describes it qualitatively — &quot;time it well&quot;, &quot;watch for openings&quot; — which is not usable advice when you are dying to the same attack repeatedly. We are extracting frame data from launch-window recordings and will replace this section when we have numbers rather than adjectives.</p></aside>
+<p>Until then, the honest version is: if a specific attack keeps beating your Hardening, assume that attack is not meant to be hardened through, and dodge it instead.</p>
+<h2 id="related">Related</h2>
+<ul><li><a href="../bosses/magdalena.html">Magdalena, the Lady of the Woods</a> — the fight where this distinction costs the most</li><li><a href="../systems/gloom-recovery.html">Recovering Gloom after you die</a> — what those deaths are actually costing you</li></ul>
+<section class="src"><h2 id="where-this-comes-from">Where this comes from</h2><p class="hint">Every claim above carries a marker. These are the sources behind them, graded by how directly they touch the retail build.</p><ol><li class="s-t2"><span class="nm">TheGamer — Beginner tips <span class="mk mk-t2" title="Reported by a guide site working from the retail build">Tested</span></span><span class="wh">Combat pacing: watch openings, do not swing wildly, farm and return</span></li><li class="s-t2"><span class="nm">Game8 — Bosses <span class="mk mk-t2" title="Reported by a guide site working from the retail build">Tested</span></span><span class="wh">Break damage through skills and parries, then riposte, as the general boss framework</span></li><li class="s-t2"><span class="nm">Game8 and Fextralife — Magdalena pages <span class="mk mk-t2" title="Reported by a guide site working from the retail build">Tested</span></span><span class="wh">Which attacks are unparryable, used here as the negative case</span></li><li class="s-t3"><span class="nm">games.gg — Beginner&#x27;s guide <span class="mk mk-t3" title="Single source, or a claim we could not cross-check">Unconfirmed</span></span><span class="wh">How Seal, Resolve and sidearm use interact with the defensive loop</span></li><li class="s-ugc"><span class="nm">Steam discussions and r/MortalShell <span class="mk mk-ugc" title="Community reports — treated as leads, not facts">Players</span></span><span class="wh">Player phrasing for Hardening failures — collection starts at launch</span></li></ol></section>
+</main>
+<nav class="toc" aria-label="On this page"><p class="toc-t">On this page</p><ul><li><a href="#what-it-is-for">What it is for</a></li><li><a href="#when-it-will-not-save-you">When it will not save you</a></li><li><a href="#break-damage-is-the-other-half">Break damage is the other half</a></li><li><a href="#what-we-do-not-know-yet">What we do not know yet</a></li><li><a href="#related">Related</a></li><li><a href="#where-this-comes-from">Where this comes from</a></li></ul></nav>
+</div></div>
+
+<footer><div class="foot">
+  <span>Marrow Notes &mdash; Mortal Shell II guides that show their sources</span>
+  <span>Checked 24 August 2026. Unofficial fan guide, not affiliated with Cold Symmetry or Playstack.</span>
+</div></footer>
+</body>
+</html>
