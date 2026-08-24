@@ -221,6 +221,14 @@ def depth_prefix(slug):
     return "../" * slug.count("/")
 
 
+def og_url(slug):
+    """Absolute — social scrapers do not resolve relative image paths.
+
+    Cards live in static/og/ and are made by make_og.py, not by this build.
+    """
+    return SITE["base"] + "/og/" + slug.replace("/", "-") + ".png"
+
+
 def localize(h, slug):
     """Rewrite root-absolute links to relative so file:// browsing works."""
     pre = depth_prefix(slug)
@@ -292,11 +300,18 @@ def build_page(p):
 <meta property="og:description" content="{html.escape(p['desc'])}">
 <meta property="og:url" content="{canonical}">
 <meta property="og:site_name" content="{SITE['name']}">
+<meta property="og:image" content="{og_url(slug)}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="{html.escape(p['h1'])} — {SITE['name']}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{html.escape(p['title'])}">
 <meta name="twitter:description" content="{html.escape(p['desc'])}">
+<meta name="twitter:image" content="{og_url(slug)}">
 <script type="application/ld+json">{ld}</script>
 <link rel="stylesheet" href="/assets/site.css">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -333,6 +348,16 @@ def main():
     os.makedirs(os.path.join(OUT, "assets"), exist_ok=True)
     with open(os.path.join(OUT, "assets", "site.css"), "w") as f:
         f.write(CSS.strip() + "\n")
+
+    # og cards and icons, pre-rendered by make_og.py — copied, never regenerated
+    # here, so CI does not need a renderer.
+    static = os.path.join(os.path.dirname(os.path.abspath(__file__)), "static")
+    if os.path.isdir(static):
+        shutil.copytree(static, OUT, dirs_exist_ok=True)
+        n = sum(len(fs) for _, _, fs in os.walk(static))
+        print(f"copied {n} static files")
+    else:
+        print("WARNING: site-src/static/ missing — run make_og.py (og images, favicon)")
 
     for p in PAGES:
         path = os.path.join(OUT, p["slug"] + ".html")

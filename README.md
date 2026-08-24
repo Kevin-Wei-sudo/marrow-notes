@@ -24,6 +24,8 @@ python3 -m http.server 8080
 site-src/content.py     所有页面文字 + 信源，改这个
 site-src/build.py       模板、CSS、mini-markdown 解析器
 site-src/seo_check.py   SEO 自检
+site-src/make_og.py     og:image 卡片 + favicon 生成器
+site-src/static/        生成好的图片，build.py 原样拷进 site/
 ```
 
 ```bash
@@ -31,6 +33,14 @@ cd site-src
 python3 build.py        # 重新生成 site/
 python3 seo_check.py    # 自检，必须 0 errors 0 warnings
 ```
+
+改了页面标题或信源之后，og 卡片要重新生成一次：
+
+```bash
+python3 make_og.py      # 只在 macOS 跑（用 Quick Look 光栅化），产物已提交
+```
+
+`build.py` 不生成图片，只拷贝 `static/`，所以 CI 里不需要浏览器或图形库。
 
 ### content.py 的写法
 
@@ -108,9 +118,21 @@ push 到 `main` 触发 `.github/workflows/pages.yml`：重跑 `build.py` + `seo_
 
 换域名只要改 `content.py` 里的 `SITE["base"]`（影响 canonical / og:url / sitemap / robots），页面之间是相对路径，不受子路径影响。
 
+## 图片
+
+站点不含游戏截图 —— Cold Symmetry / Playstack 的美术素材没有公开授权的 press kit，不往仓库里放。
+
+现有的图片都是从站点自己的配色和字体生成的：
+
+| 文件 | 用途 |
+|---|---|
+| `og/*.png` | 每页一张 1200×630 社交分享卡片，底部标该页的信源构成 |
+| `assets/favicon.svg` | 标签页图标，Marrow 的 M + 站名里那个点 |
+| `assets/apple-touch-icon.png` | iOS 添加到主屏幕，180×180 |
+
 ## 还没做的
 
 - 用的是 `github.io` 子路径，没接自有域名
-- 没有图片，因此没有 og:image
+- 正文没有配图（boss 位置图、Shell 外观），需要游戏素材授权
 - Hardening 页缺帧数数据，页面里已用 Unconfirmed 块标明
 - Magdalena 页的「Still dying?」诊断表是从二手信源推的，需实际游玩验证
