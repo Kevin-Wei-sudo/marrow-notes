@@ -10,7 +10,7 @@ SITE = {
 
     # GA4 measurement ID (G-XXXXXXXXXX). Empty = no analytics in the output,
     # which is what you want when building locally.
-    "ga": "",
+    "ga": "G-03TS215VKQ",
 
     # Search Console verification token — the content="..." value from the
     # "HTML tag" method. Empty = tag omitted.
