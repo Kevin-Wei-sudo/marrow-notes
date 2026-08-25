@@ -239,6 +239,24 @@ def localize(h, slug):
     return re.sub(r'(href|src)="/([^"]*)"', lambda m: f'{m.group(1)}="{pre}{m.group(2)}"', h)
 
 
+def analytics_block():
+    """GA4 and the Search Console tag. Both stay out of the HTML entirely
+    until their IDs are filled in, so a local build sends nothing."""
+    out = ""
+    token = SITE.get("gsc_verify", "").strip()
+    if token:
+        out += f'<meta name="google-site-verification" content="{html.escape(token)}">\n'
+    ga = SITE.get("ga", "").strip()
+    if ga:
+        out += (
+            f'<script async src="https://www.googletagmanager.com/gtag/js?id={ga}"></script>\n'
+            f"<script>window.dataLayer=window.dataLayer||[];"
+            f"function gtag(){{dataLayer.push(arguments);}}"
+            f"gtag('js',new Date());gtag('config','{ga}');</script>\n"
+        )
+    return out
+
+
 def hero_block(slug):
     """Publisher screenshot under the lede. Caption carries the credit, the
     same way every factual claim on this site carries its source."""
@@ -333,7 +351,7 @@ def build_page(p):
 <link rel="stylesheet" href="/assets/site.css">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-</head>
+{analytics_block()}</head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="bar"><div class="bar-in">
@@ -390,7 +408,7 @@ def main():
 
     urls = "".join(
         f"<url><loc>{SITE['base']}{'/' if p['slug'] == 'index' else url_for(p['slug'])}</loc>"
-        f"<lastmod>2026-08-24</lastmod></url>\n"
+        f"<lastmod>{SITE['lastmod']}</lastmod></url>\n"
         for p in PAGES
     )
     with open(os.path.join(OUT, "sitemap.xml"), "w") as f:

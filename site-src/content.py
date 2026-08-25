@@ -1,8 +1,20 @@
 SITE = {
     "name": "Marrow Notes",
     "tagline": "Mortal Shell II guides that show their sources",
-    "base": "https://kevin-wei-sudo.github.io/marrow-notes",
-    "updated": "24 August 2026",
+
+    # The canonical home. The site is also served from GitHub Pages, but every
+    # page there points its canonical here, so Google indexes one copy, not two.
+    "base": "https://marrow-notes-mu.vercel.app",
+    "updated": "25 August 2026",
+    "lastmod": "2026-08-25",     # ISO form of `updated`, for sitemap.xml
+
+    # GA4 measurement ID (G-XXXXXXXXXX). Empty = no analytics in the output,
+    # which is what you want when building locally.
+    "ga": "",
+
+    # Search Console verification token — the content="..." value from the
+    # "HTML tag" method. Empty = tag omitted.
+    "gsc_verify": "",
 }
 
 # tier: t1 = official, t2 = tested guide site, t3 = needs cross-checking, ugc = players
