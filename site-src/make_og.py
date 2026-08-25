@@ -10,15 +10,15 @@ Uses SVG + macOS Quick Look (qlmanage) to rasterise, so it has no third-party
 dependencies. Quick Look scales an SVG to a square, so each card is drawn on a
 1200x1200 canvas with the real 1200x630 artboard centred, then cropped back.
 """
+import base64
 import os
-import re
 import shutil
 import subprocess
 import sys
 import tempfile
 from xml.sax.saxutils import escape
 
-from content import PAGES
+from content import PAGES, HEROES
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 STATIC = os.path.join(HERE, "static")   # mirrors the layout of site/
@@ -35,7 +35,24 @@ TIERS = [("t1", "Official"), ("t2", "Tested"), ("t3", "Unconfirmed"), ("ugc", "P
 
 
 def og_name(slug):
-    return slug.replace("/", "-") + ".png"
+    return slug.replace("/", "-") + ".jpg"
+
+
+def backdrop(slug):
+    """Pages with a hero screenshot get it behind the type, dimmed so the
+    text stays legible. Pages without one keep the flat ink ground."""
+    if slug not in HEROES:
+        return ""
+    src = os.path.join(HERE, "static", "shots", HEROES[slug][0] + ".jpg")
+    if not os.path.exists(src):
+        return ""
+    with open(src, "rb") as f:
+        b64 = base64.b64encode(f.read()).decode()
+    return (
+        f'<image xlink:href="data:image/jpeg;base64,{b64}" x="0" y="0" '
+        f'width="{W}" height="{H}" preserveAspectRatio="xMidYMid slice"/>'
+        f'<rect width="{W}" height="{H}" fill="{INK}" opacity="0.72"/>'
+    )
 
 
 def wrap(text, size, width):
@@ -81,9 +98,11 @@ def card_svg(p):
     rule_top = top - size * 0.78
     rule_h = (len(lines) - 1) * lead + size * 0.98
 
-    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{W}" viewBox="0 0 {W} {W}">
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="{W}" height="{W}" viewBox="0 0 {W} {W}">
 <rect width="{W}" height="{W}" fill="{INK}"/>
 <g transform="translate(0,{(W - H) // 2})">
+  {backdrop(p['slug'])}
   <text x="{PAD}" y="86" fill="{BONE}" font-family="{SANS}" font-size="19"
         font-weight="600" letter-spacing="4.5">MARROW·NOTES</text>
   <text x="{PAD}" y="124" fill="{VERDIGRIS}" font-family="{SANS}" font-size="16"
@@ -125,7 +144,9 @@ def rasterise(svg, dst, crop=None, size=1200, scale_to=None):
         if not os.path.exists(raw):
             sys.exit(f"Quick Look produced no thumbnail for {dst}")
         if crop:
-            subprocess.run(["sips", "-c", str(crop[1]), str(crop[0]), raw, "--out", dst],
+            subprocess.run(["sips", "-c", str(crop[1]), str(crop[0]),
+                            "-s", "format", "jpeg", "-s", "formatOptions", "78",
+                            raw, "--out", dst],
                            check=True, capture_output=True)
         elif scale_to:
             subprocess.run(["sips", "--resampleWidth", str(scale_to), raw, "--out", dst],
@@ -137,8 +158,8 @@ def rasterise(svg, dst, crop=None, size=1200, scale_to=None):
 def main():
     if sys.platform != "darwin":
         sys.exit("Needs macOS Quick Look (qlmanage) to rasterise. Commit the PNGs instead.")
-    if os.path.isdir(STATIC):
-        shutil.rmtree(STATIC)
+    if os.path.isdir(OG):
+        shutil.rmtree(OG)          # shots/ is hand-curated — never wipe it
     os.makedirs(OG, exist_ok=True)
     os.makedirs(ASSETS, exist_ok=True)
 

@@ -4,7 +4,7 @@ import html
 import os
 import re
 import shutil
-from content import SITE, PAGES
+from content import SITE, PAGES, HEROES, IMAGE_CREDIT
 
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "site")
 OUT = os.path.normpath(OUT)
@@ -59,6 +59,10 @@ main{min-width:0;max-width:70ch}
 .eyebrow{font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--verdigris);margin:0 0 12px}
 h1{font-family:var(--sans);font-weight:600;font-size:2.05rem;line-height:1.15;letter-spacing:-.02em;color:var(--bone);margin:0 0 18px}
 .lede{font-size:1.14rem;line-height:1.7;color:#CBD3D0;margin:0 0 8px;border-left:2px solid var(--verdigris);padding-left:18px}
+.hero{margin:26px 0 30px}
+.hero img{display:block;width:100%;height:auto;border:1px solid var(--line);background:var(--stone)}
+.hero figcaption{font-family:var(--sans);font-size:12.5px;line-height:1.6;color:var(--slate);margin-top:9px}
+.hero .credit{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#5A666A;margin-top:3px}
 h2{font-family:var(--sans);font-weight:600;font-size:1.28rem;letter-spacing:-.01em;color:var(--bone);margin:46px 0 14px;padding-top:14px;border-top:1px solid var(--line)}
 h3{font-family:var(--sans);font-weight:600;font-size:1.02rem;color:var(--bone);margin:28px 0 8px}
 p{margin:0 0 18px}
@@ -226,13 +230,29 @@ def og_url(slug):
 
     Cards live in static/og/ and are made by make_og.py, not by this build.
     """
-    return SITE["base"] + "/og/" + slug.replace("/", "-") + ".png"
+    return SITE["base"] + "/og/" + slug.replace("/", "-") + ".jpg"
 
 
 def localize(h, slug):
     """Rewrite root-absolute links to relative so file:// browsing works."""
     pre = depth_prefix(slug)
     return re.sub(r'(href|src)="/([^"]*)"', lambda m: f'{m.group(1)}="{pre}{m.group(2)}"', h)
+
+
+def hero_block(slug):
+    """Publisher screenshot under the lede. Caption carries the credit, the
+    same way every factual claim on this site carries its source."""
+    if slug not in HEROES:
+        return ""
+    name, caption = HEROES[slug]
+    return (
+        f'<figure class="hero">'
+        f'<img src="/shots/{name}.jpg" width="1400" height="788" '
+        f'alt="{html.escape(caption)}" loading="lazy" decoding="async">'
+        f'<figcaption>{html.escape(caption)} '
+        f'<span class="credit">{html.escape(IMAGE_CREDIT)}</span></figcaption>'
+        f"</figure>"
+    )
 
 
 def sources_block(srcs):
@@ -301,6 +321,7 @@ def build_page(p):
 <meta property="og:url" content="{canonical}">
 <meta property="og:site_name" content="{SITE['name']}">
 <meta property="og:image" content="{og_url(slug)}">
+<meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="{html.escape(p['h1'])} — {SITE['name']}">
@@ -326,6 +347,7 @@ def build_page(p):
 <p class="eyebrow">{html.escape(p['eyebrow'])}</p>
 <h1>{html.escape(p['h1'])}</h1>
 <p class="lede">{html.escape(p['lede'])}</p>
+{hero_block(slug)}
 {body}
 {sources_block(p.get('sources'))}
 </main>

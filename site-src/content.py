@@ -551,3 +551,33 @@ This sounds obvious and almost nobody does it, because the upgrade always feels 
  ],
 },
 ]
+
+# ------------------------------------------------------------------ images
+# Publisher screenshots from the Steam store page (app 2584270), used as
+# atmosphere. Cold Symmetry / Playstack own them; this site does not.
+#
+# None of them is labelled with a boss or a location by the publisher, so a
+# caption may only describe what is visibly in the frame. Do not caption a
+# screenshot as a specific fight we have not seen confirmed — the whole point
+# of this site is that it does not invent things.
+
+IMAGE_CREDIT = "Cold Symmetry / Playstack — Steam store page"
+
+HEROES = {
+ "index": ("forest-ruins",
+   "Ruins in the mist, from the publisher's own screenshots."),
+ "bosses/index": ("castle-duel",
+   "A duel outside the keep. Publisher screenshot — the enemy is not named in it."),
+ "bosses/magdalena": ("mire-antlered",
+   "An antlered enemy in the swamp. This is a publisher screenshot of the region, "
+   "not the Magdalena arena — no official image of that fight has been released."),
+ "bosses/zmey-or-malborn": ("ashen-ruins",
+   "The ashen ruins. Publisher screenshot; the long-limbed enemy in it is unnamed."),
+ "shells/index": ("equipment-screen",
+   "The Change Equipment screen at Marrow Keep. This one is readable: it shows "
+   "Proxima, the Broodseeker, with Biosampler and Grafted Armor."),
+ "shells/best-first-shell": ("candlelit-hall",
+   "A candlelit hall. Publisher screenshot, shown for atmosphere only."),
+ "systems/index": ("village-rain",
+   "The village in the rain. Publisher screenshot."),
+}

@@ -120,15 +120,27 @@ push 到 `main` 触发 `.github/workflows/pages.yml`：重跑 `build.py` + `seo_
 
 ## 图片
 
-站点不含游戏截图 —— Cold Symmetry / Playstack 的美术素材没有公开授权的 press kit，不往仓库里放。
+| 文件 | 用途 | 来源 |
+|---|---|---|
+| `shots/*.jpg` | 7 张页面配图，1400×788 | 发行商截图 |
+| `og/*.jpg` | 每页一张 1200×630 分享卡，有配图的页面用截图压暗作底 | 混合 |
+| `assets/favicon.svg` | 标签页图标，Marrow 的 M + 站名里那个点 | 自制 |
+| `assets/apple-touch-icon.png` | iOS 加到主屏幕，180×180 | 自制 |
 
-现有的图片都是从站点自己的配色和字体生成的：
+### 版权
 
-| 文件 | 用途 |
-|---|---|
-| `og/*.png` | 每页一张 1200×630 社交分享卡片，底部标该页的信源构成 |
-| `assets/favicon.svg` | 标签页图标，Marrow 的 M + 站名里那个点 |
-| `assets/apple-touch-icon.png` | iOS 添加到主屏幕，180×180 |
+`shots/` 里的截图取自 Steam 商店页（app 2584270），版权属 **Cold Symmetry / Playstack**，本站不拥有。
+每张图的 `figcaption` 都带来源标注，页脚已声明本站为非官方粉丝站。这是粉丝攻略站的通行做法，
+但**不是**发行商明确授权 —— 官方没有公开 press kit。收到任何异议就撤图。
+
+### 配图不许编造
+
+发行商没有给任何一张截图标注 boss 名或地点。所以图注只能描述画面里**看得见**的东西，
+不能把一张截图说成某场没有确认过的战斗 —— 这个站的立身之本就是不编造。
+
+`content.py` 里 Magdalena 那条图注就是范例：明说那是该区域的官方截图，不是她的战斗场景，
+因为官方从未放出那场战斗的图。`shells/index` 那条可以说得具体，因为画面里就印着
+Proxima, the Broodseeker 和她的两个技能。
 
 ## 还没做的
 
