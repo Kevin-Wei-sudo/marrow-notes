@@ -131,7 +131,15 @@ footer{border-top:1px solid var(--line);margin-top:0}
   .nav{gap:14px;font-size:12px;flex-wrap:wrap}
   .wrap{padding:0 18px}
   .cols{padding:26px 0 48px}
-  .mk{margin-left:4px}
+  /* source markers are the point of this site — keep them readable on a phone */
+  .mk{margin-left:4px;font-size:11px;padding:2px 6px}
+  /* thumb-sized tap targets: the text stays small, the hit area does not */
+  .nav a{display:inline-block;padding:11px 2px}
+  .brand{display:inline-block;padding:6px 0}
+  .crumb{font-size:12.5px;line-height:2.1}
+  .crumb a{display:inline-block;padding:5px 0}
+  .toc a{padding:7px 0}
+  .toc li{margin:0}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 """
