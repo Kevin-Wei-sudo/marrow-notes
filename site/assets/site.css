@@ -43,7 +43,7 @@ h1{font-family:var(--sans);font-weight:600;font-size:2.05rem;line-height:1.15;le
 .hero{margin:26px 0 30px}
 .hero img{display:block;width:100%;height:auto;border:1px solid var(--line);background:var(--stone)}
 .hero figcaption{font-family:var(--sans);font-size:12.5px;line-height:1.6;color:var(--slate);margin-top:9px}
-.hero .credit{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#5A666A;margin-top:3px}
+.hero .credit{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--slate);margin-top:3px}
 h2{font-family:var(--sans);font-weight:600;font-size:1.28rem;letter-spacing:-.01em;color:var(--bone);margin:46px 0 14px;padding-top:14px;border-top:1px solid var(--line)}
 h3{font-family:var(--sans);font-weight:600;font-size:1.02rem;color:var(--bone);margin:28px 0 8px}
 p{margin:0 0 18px}
